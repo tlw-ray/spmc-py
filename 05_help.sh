@@ -1,0 +1,1 @@
+python3 spmc/cli.py -h

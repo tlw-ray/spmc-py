@@ -42,38 +42,65 @@
 - 开发环境: 
     - IDE: pycharm社区版
     - 语言: python3.6
-    - 类库: pika, pickle, random
+    - 第三方类库: pika, pickle, psutil,（需要: pip install)
     - 中间件: RabbitMQ3.7
 
 ## 制品与执行
 
 - 运行环境: python3
 - 执行脚本
-    - 启动RabbitMQ中间件:
+    - 启动带有管理界面的RabbitMQ中间件:
     ~~~shell
     # 启动带有管理界面的RabbitMQ
-    docker run \
-    -d \
-    -p 4369:4369 \
-    -p 5671:5671 \
-    -p 15671:15671 \
-    -p 5672:5672 \
-    -p 15672:15672 \
-    -p 25672:25672 \
-    -p 61613:61613 \
-    --name RabbitMQ \
-    rabbitmq:3.7.16-management
+    sh 00_rabbitmq.sh
+    ~~~
+    - 安装pip依赖项
+    ~~~
+    sh 01_pip_install.sh
     ~~~
     - 启动消费者
     ~~~
-    sh consumer.sh
-    sh consumer.sh
-    sh consumer.sh
+    sh 02_consumer.sh
+    sh 03_consumer.sh
     ~~~
     - 启动一个生产者
     ~~~
-    sh producer.sh
+    sh 04_producer.sh
     ~~~
+    - 查看使用帮助
+    ~~~
+    sh 05_help.sh
+    ~~~
+## 其他
+
+- 帮助信息
+~~~shell
+python3 spmc/cli.py -h
+
+[*] 帮助信息:
+[*]      使用方式:
+[*]          python3 cli.py [选项] 命令
+[*]      示例:
+[*]          以消费者模式启动: python3 cli.py -c
+[*]          以生产者模式启动: python3 cli.py -p
+[*]      选项:
+[*]          -c --cpu 指定cpu运行, 本机可选值: [0, 1, 2, 3, 4, 5, 6, 7]
+[*]          -q --queue 指定queue的名称, 默认为spmc.queue
+[*]          -s --server 指定消息队列主机的名称, 默认为localhost
+[*]      命令:
+[*]          -p --producer 以生产者的方式运行
+[*]          -c --consumer 以消费者的方式运行
+[*]          -v --version 打印版本信息
+[*]          -h --help 打印帮助信息
+[*]          默认: 打印帮助信息
+~~~
+- 版本信息
+~~~shell
+python3 spmc/cli.py -v
+[*] 单生产者多消费者示例程序
+[*] SPMC
+[*] Version 0.0.1
+~~~
 
 ## TODO 未完成
 
