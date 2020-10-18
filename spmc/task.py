@@ -26,7 +26,7 @@ class AddIntTask:
 
 class PrintStringTask:
     """
-    输出打印xxx字符串的Task
+    返回'打印: xxx'字符串的Task
     """
     def __init__(self, content):
         self.content = content

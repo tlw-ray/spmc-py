@@ -25,3 +25,4 @@ def run():
     channel.queue_declare(queue=queue.name)
     channel.basic_consume(queue.name, callback, auto_ack=True)
     channel.start_consuming()
+

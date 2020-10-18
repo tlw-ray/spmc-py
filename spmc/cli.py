@@ -14,23 +14,28 @@ def usage():
     打印使用说明
     :return:
     """
+
     cpu_list = process.cpu_affinity()
-    print("[*] 帮助信息:")
-    print("[*]      使用方式:")
-    print("[*]          python3 cli.py [选项] 命令")
-    print("[*]      示例:")
-    print("[*]          以消费者模式启动: python3 cli.py -c")
-    print("[*]          以生产者模式启动: python3 cli.py -p")
-    print("[*]      选项:")
-    print("[*]          -c --cpu 指定cpu运行, 本机可选值: " + str(cpu_list))
-    print("[*]          -q --queue 指定queue的名称, 默认为spmc.queue")
-    print("[*]          -s --server 指定消息队列主机的名称, 默认为localhost")
-    print("[*]      命令:")
-    print("[*]          -p --producer 以生产者的方式运行")
-    print("[*]          -c --consumer 以消费者的方式运行")
-    print("[*]          -v --version 打印版本信息")
-    print("[*]          -h --help 打印帮助信息")
-    print("[*]          默认: 打印帮助信息")
+    cpu_list_str = str(cpu_list)
+    usage_str = """
+[*] 帮助信息:
+[*]      使用方式:
+[*]          python3 cli.py [选项] 命令
+[*]      示例:
+[*]          以消费者模式启动: python3 cli.py -c
+[*]          以生产者模式启动: python3 cli.py -p
+[*]      选项:
+[*]          -c --cpu 指定cpu运行, 本机可选值: " + %s
+[*]          -q --queue 指定queue的名称, 默认为spmc.queue
+[*]          -s --server 指定消息队列主机的名称, 默认为localhost
+[*]      命令:
+[*]          -p --producer 以生产者的方式运行
+[*]          -c --consumer 以消费者的方式运行
+[*]          -v --version 打印版本信息
+[*]          -h --help 打印帮助信息
+[*]          默认: 打印帮助信息
+    """ % cpu_list_str
+    print(usage_str)
 
 
 opts, args = getopt.getopt(sys.argv[1:], "q:s:u:hvcp",
