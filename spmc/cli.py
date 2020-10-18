@@ -10,6 +10,10 @@ process = psutil.Process()
 
 
 def usage():
+    """
+    打印使用说明
+    :return:
+    """
     cpu_list = process.cpu_affinity()
     print("[*] 帮助信息:")
     print("[*]      使用方式:")

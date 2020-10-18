@@ -2,12 +2,17 @@ import random
 
 
 class Task:
+    """
+    各种Task的基类
+    """
     def call(self):
         pass
 
 
 class AddIntTask:
-
+    """
+    两个整数相加的Task
+    """
     def __init__(self, left, right):
         self.left = left
         self.right = right
@@ -20,7 +25,9 @@ class AddIntTask:
 
 
 class PrintStringTask:
-
+    """
+    输出打印xxx字符串的Task
+    """
     def __init__(self, content):
         self.content = content
 
@@ -32,6 +39,10 @@ class PrintStringTask:
 
 
 def create_task():
+    """
+    根据随机整数是否能被2正处来随机创建两种Task的方法
+    :return:
+    """
     if random.randint(0, 1) % 2 == 0:
         left = random.randint(0, 100)
         right = random.randint(0, 100)
